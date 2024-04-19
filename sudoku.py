@@ -30,53 +30,6 @@ def create_button(button_text, x, y, button_length, button_width, button_color, 
     pygame.draw.rect(screen, button_color, button, 0, 5)
     print_text(button_text, x, y, size, color, is_bold)
 
-"""
-Prints sudoku number to screen
-NOt setting backend correctly
-"""
-def print_number(pressed, click_position):
-    if pressed[pygame.K_1]:
-        value = 1
-        board.sketch(value, click_position[0], click_position[1])
-    elif pressed[pygame.K_2]:
-        value = 2
-        board.sketch(value, click_position[0], click_position[1])
-    elif pressed[pygame.K_3]:
-        value = 3
-        board.sketch(value, click_position[0], click_position[1])
-    elif pressed[pygame.K_4]:
-        value = 4
-        board.sketch(value, click_position[0], click_position[1])
-    elif pressed[pygame.K_5]:
-        value = 5
-        board.sketch(value, click_position[0], click_position[1])
-    elif pressed[pygame.K_6]:
-        value = 6
-        board.sketch(value, click_position[0], click_position[1])
-    elif pressed[pygame.K_7]:
-        value = 7
-        board.sketch(value, click_position[0], click_position[1])
-    elif pressed[pygame.K_8]:
-        value = 8
-        board.sketch(value, click_position[0], click_position[1])
-    elif pressed[pygame.K_9]:
-        value = 9
-        board.sketch(value, click_position[0], click_position[1])
-
-    if pressed[pygame.K_RETURN]:
-        screen.fill("white")
-        board.clear(click_position[0] - 1, click_position[1] - 1)
-        board.draw()
-        try:
-            board.place_number(value, click_position[0] * 80 - 80, click_position[1] * 80 - 80)
-            board.update_board(click_position[0] - 1, click_position[1] - 1, value)
-        except:
-            return True
-        return True
-
-    return False
-
-
 if __name__ == "__main__":
     pygame.init()
 
@@ -143,7 +96,6 @@ if __name__ == "__main__":
                         board = Board(3, 3, screen, 40)
                         no_selection = False
 
-
                     elif check_mouse_pos(mouse_pos[0], mouse_pos[1], 510, 550, 610, 610):
                         board = Board(3, 3, screen, 50)
                         no_selection = False
@@ -203,9 +155,46 @@ if __name__ == "__main__":
                         while no_input is True:
                             mouse_pos = pygame.mouse.get_pos()
                             pressed = pygame.key.get_pressed()
-                            x = print_number(pressed, click_position)
-                            if x is True:
-                                no_input = False
+
+                            if pressed[pygame.K_1]:
+                                value = 1
+                                board.sketch(value, click_position[0], click_position[1])
+                            elif pressed[pygame.K_2]:
+                                value = 2
+                                board.sketch(value, click_position[0], click_position[1])
+                            elif pressed[pygame.K_3]:
+                                value = 3
+                                board.sketch(value, click_position[0], click_position[1])
+                            elif pressed[pygame.K_4]:
+                                value = 4
+                                board.sketch(value, click_position[0], click_position[1])
+                            elif pressed[pygame.K_5]:
+                                value = 5
+                                board.sketch(value, click_position[0], click_position[1])
+                            elif pressed[pygame.K_6]:
+                                value = 6
+                                board.sketch(value, click_position[0], click_position[1])
+                            elif pressed[pygame.K_7]:
+                                value = 7
+                                board.sketch(value, click_position[0], click_position[1])
+                            elif pressed[pygame.K_8]:
+                                value = 8
+                                board.sketch(value, click_position[0], click_position[1])
+                            elif pressed[pygame.K_9]:
+                                value = 9
+                                board.sketch(value, click_position[0], click_position[1])
+
+                            if pressed[pygame.K_RETURN]:
+                                screen.fill("white")
+                                board.clear(click_position[0] - 1, click_position[1] - 1)
+                                board.draw()
+                                try:
+                                    board.place_number(value, click_position[0] * 80 - 80, click_position[1] * 80 - 80)
+                                    board.update_board(click_position[0] - 1, click_position[1] - 1, value)
+                                    no_input = False
+                                except:
+                                    pass
+
                             pygame.display.update()
 
                             for ev in pygame.event.get():
